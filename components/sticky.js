@@ -12,7 +12,11 @@ var Sticky = React.createClass({
   handleResize: function() {
     this.props.onStickyStateChange( false );
     // set style with callback to reset once style rendered succesfully
-    this.setState({ style: {}, className: '' }, this.reset);
+    var self = this;
+    this.setState({ style: {}, className: '' }, function () {
+      self.reset();
+      self.handleScroll();
+    });        
   },
 
   handleScroll: function() {
